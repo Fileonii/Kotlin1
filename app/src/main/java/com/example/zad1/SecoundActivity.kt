@@ -6,8 +6,11 @@ import android.view.View
 import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import java.sql.Types.NULL
 
 import kotlin.collections.ArrayList
+
+
 
 class SecoundActivity : AppCompatActivity() {
 
@@ -34,7 +37,7 @@ class SecoundActivity : AppCompatActivity() {
         val surnameText = findViewById<TextView>(R.id.textSurname)
         val numberText = findViewById<TextView>(R.id.textNumber)
 
-        val avgText = findViewById<TextView>(R.id.textAvg)
+
 
         val buttonAvg = findViewById<Button>(R.id.buttonAvg)
 
@@ -60,8 +63,7 @@ class SecoundActivity : AppCompatActivity() {
             linearLayout.addView(seekBar)
         }
 
-        var x = 0
-        var oceny : Float = x.toFloat()
+
 
 
 
@@ -73,11 +75,14 @@ class SecoundActivity : AppCompatActivity() {
 
                 override fun onProgressChanged(seekBar: SeekBar, prog: Int, b: Boolean) {
                     // Display the current progress of SeekBar
-                    val min= 2
+                  /*  val min= 2
 
                     seekBarValues[x] = (min + seekBarArrays[x].progress).toFloat()
-                    val ocena = seekBarValues[x]
-                    Toast.makeText(applicationContext,"Ocena : $ocena",Toast.LENGTH_SHORT).show()
+                    val ocena = seekBarValues[x] */
+                    val min=2
+                    var temp = (min + seekBarArrays[x].progress).toFloat()
+                    seekBarValues.add(temp)
+                    Toast.makeText(applicationContext,"Ocena : $temp",Toast.LENGTH_SHORT).show()
                 }
 
 
@@ -89,33 +94,36 @@ class SecoundActivity : AppCompatActivity() {
                 override fun onStopTrackingTouch(seekBar: SeekBar) {
                     // Do something
                     //Toast.makeText(applicationContext,"stop tracking",Toast.LENGTH_SHORT).show()
-                    val min=2
-                     var temp = (min + seekBarArrays[x].progress).toFloat()
-                    seekBarValues.add(temp)
+
 
 
                 }
 
                 })
 
-                oceny += seekBarValues[x]
+
 
         }
 
 
-        buttonAvg.setOnClickListener(object:View.OnClickListener{
-            override fun onClick(v:View)
-            {
-                var avg =oceny/i
-                avgText.text = "Srednia wynosi: $oceny / $i = $avg"
-
-            }
-        } )
-
 
     }
+    fun submit2(v:View){
+        val avgText = findViewById<TextView>(R.id.textAvg)
+        var x = 0
+        var oceny : Float = x.toFloat()
+        if( seekBarValues.isNotEmpty()){
 
+            for(i in seekBarValues){
+                oceny += seekBarValues[x]
+            }
+        }
+        var avg=oceny/seekBarValues.count()
+        avgText.text = "Srednia wynosi: $oceny / ${seekBarValues.count()} = $avg"
+    }
 }
+
+
 
 
 

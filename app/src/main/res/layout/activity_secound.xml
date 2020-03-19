@@ -35,7 +35,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Button"
-        android:onClick=""/>
+        android:onClick="submit2"/>
 
     <TextView
         android:id="@+id/textAvg"
