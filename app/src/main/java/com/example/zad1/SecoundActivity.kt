@@ -4,18 +4,26 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 
 import kotlin.collections.ArrayList
 
 class SecoundActivity : AppCompatActivity() {
 
+    var seekBarArrays= ArrayList<SeekBar>()
+    var seekBarValues= ArrayList<Float>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_secound)
 
+
+
         val linearLayout = findViewById<LinearLayout>(R.id.linearLayout)
         //val seekBar = SeekBar(this)
-        var seekBarArrays= ArrayList<SeekBar>()
+
 
         val bundle: Bundle? =intent.extras
         val name = bundle!!.getString("user_name")
@@ -52,6 +60,9 @@ class SecoundActivity : AppCompatActivity() {
             linearLayout.addView(seekBar)
         }
 
+        var x = 0
+        var oceny : Float = x.toFloat()
+
 
 
         for (x in 0 until i){
@@ -64,12 +75,11 @@ class SecoundActivity : AppCompatActivity() {
                     // Display the current progress of SeekBar
                     val min= 2
 
-
-                 var ocena = (min + seekBarArrays[x].progress).toFloat()
-
+                    seekBarValues[x] = (min + seekBarArrays[x].progress).toFloat()
+                    val ocena = seekBarValues[x]
                     Toast.makeText(applicationContext,"Ocena : $ocena",Toast.LENGTH_SHORT).show()
-
                 }
+
 
                 override fun onStartTrackingTouch(seekBar: SeekBar) {
                     // Do something
@@ -80,11 +90,13 @@ class SecoundActivity : AppCompatActivity() {
                     // Do something
                     //Toast.makeText(applicationContext,"stop tracking",Toast.LENGTH_SHORT).show()
                     val min=2
-                    var ocena = (min + seekBarArrays[x].progress).toFloat()
+                     seekBarValues[x] = (min + seekBarArrays[x].progress).toFloat()
 
                 }
-            })
 
+                })
+
+                oceny += seekBarValues[x]
 
         }
 
@@ -92,8 +104,9 @@ class SecoundActivity : AppCompatActivity() {
         buttonAvg.setOnClickListener(object:View.OnClickListener{
             override fun onClick(v:View)
             {
-                //var avg = (counter/i).toFloat()
-              //  avgText.text = "Srednia wynosi: $counter / $i = $avg"
+                var avg =oceny/i
+                avgText.text = "Srednia wynosi: $oceny / $i = $avg"
+
             }
         } )
 
@@ -101,3 +114,6 @@ class SecoundActivity : AppCompatActivity() {
     }
 
 }
+
+
+
