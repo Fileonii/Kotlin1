@@ -90,7 +90,9 @@ class SecoundActivity : AppCompatActivity() {
                     // Do something
                     //Toast.makeText(applicationContext,"stop tracking",Toast.LENGTH_SHORT).show()
                     val min=2
-                     seekBarValues[x] = (min + seekBarArrays[x].progress).toFloat()
+                     var temp = (min + seekBarArrays[x].progress).toFloat()
+                    seekBarValues.add(temp)
+
 
                 }
 
