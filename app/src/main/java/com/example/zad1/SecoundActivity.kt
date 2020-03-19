@@ -15,7 +15,7 @@ import kotlin.collections.ArrayList
 class SecoundActivity : AppCompatActivity() {
 
     var seekBarArrays= ArrayList<SeekBar>()
-    var seekBarValues= ArrayList<Float>()
+    var seekBarValues= ArrayList<Int>()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,7 +39,7 @@ class SecoundActivity : AppCompatActivity() {
 
 
 
-        val buttonAvg = findViewById<Button>(R.id.buttonAvg)
+    //    val buttonAvg = findViewById<Button>(R.id.buttonAvg)
 
         nameText.text = "Name: $name"
         surnameText.text = "Surname: $surname"
@@ -80,7 +80,7 @@ class SecoundActivity : AppCompatActivity() {
                     seekBarValues[x] = (min + seekBarArrays[x].progress).toFloat()
                     val ocena = seekBarValues[x] */
                     val min=2
-                    var temp = (min + seekBarArrays[x].progress).toFloat()
+                    var temp = min + seekBarArrays[x].progress
                     seekBarValues.add(temp)
                     Toast.makeText(applicationContext,"Ocena : $temp",Toast.LENGTH_SHORT).show()
                 }
@@ -113,12 +113,14 @@ class SecoundActivity : AppCompatActivity() {
         var x = 0
         var oceny : Float = x.toFloat()
         if( seekBarValues.isNotEmpty()){
+         var temp=seekBarValues.count()
 
-            for(i in seekBarValues){
-                oceny += seekBarValues[x]
+            for(it in 0 until temp){ //if seekBarValues min  = 2
+
+                oceny += seekBarValues[it]
             }
         }
-        var avg=oceny/seekBarValues.count()
+        var avg= (oceny/seekBarValues.count()).toFloat()
         avgText.text = "Srednia wynosi: $oceny / ${seekBarValues.count()} = $avg"
     }
 }
