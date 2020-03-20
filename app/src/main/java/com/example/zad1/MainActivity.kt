@@ -31,15 +31,21 @@ class MainActivity : AppCompatActivity() {
         val Text3 = findViewById<EditText>(R.id.Text3)
             val number = Text3.text.toString()
 
-        Toast.makeText(this, "Witaj $name $surname!",Toast.LENGTH_LONG).show()
 
-        val intent = Intent(this, SecoundActivity::class.java)
+        if (number.toInt() > 0){
+            Toast.makeText(this, "Witaj $name $surname!",Toast.LENGTH_LONG).show()
+            val intent = Intent(this, SecoundActivity::class.java)
+            intent.putExtra("user_name",name)
+            intent.putExtra("user_surname",surname)
+            intent.putExtra("user_number",number)
+            startActivity(intent)
 
-        intent.putExtra("user_name",name)
-        intent.putExtra("user_surname",surname)
-        intent.putExtra("user_number",number)
+        }
+        else
+        {
+            Toast.makeText(this, "Podaj licbe calkowita wieksza od 1", Toast.LENGTH_SHORT).show()
+        }
 
-        startActivity(intent)
     }
 
 }

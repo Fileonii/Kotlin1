@@ -109,7 +109,7 @@ class SecoundActivity : AppCompatActivity() {
 
     }
     fun submit2(v:View){
-        val avgText = findViewById<TextView>(R.id.textAvg)
+        val buttonAvg = findViewById<Button>(R.id.buttonAvg)
         var x = 0
         var oceny : Float = x.toFloat()
         if( seekBarValues.isNotEmpty()){
@@ -121,11 +121,15 @@ class SecoundActivity : AppCompatActivity() {
             }
         }
         var avg= (oceny/seekBarValues.count()).toFloat()
-        avgText.text = "Srednia wynosi: $oceny / ${seekBarValues.count()} = $avg"
+
+        buttonAvg.isClickable= false
+        buttonAvg.text = "Srednia wynosi: $oceny / ${seekBarValues.count()} = $avg"
+
     }
 }
 
 
 
-
-
+//save instance
+//empty seekbar
+//layout
