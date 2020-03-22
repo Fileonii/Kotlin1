@@ -15,8 +15,9 @@ import kotlin.collections.ArrayList
 class SecoundActivity : AppCompatActivity() {
 
     var seekBarArrays= ArrayList<SeekBar>()
-    var seekBarValues= ArrayList<Int>()
 
+   // var temp= ArrayList<Int>()
+    var seekBarValues= ArrayList<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +49,6 @@ class SecoundActivity : AppCompatActivity() {
 
 
         val i: Int = number!!.toInt()
-        println(i)
 
 
 
@@ -58,7 +58,7 @@ class SecoundActivity : AppCompatActivity() {
             //seekBar.max =5
 
             seekBarArrays.add(seekBar)
-            seekBarArrays[x].max=3
+            seekBarArrays[x].max=4
 
             linearLayout.addView(seekBar)
         }
@@ -75,14 +75,11 @@ class SecoundActivity : AppCompatActivity() {
 
                 override fun onProgressChanged(seekBar: SeekBar, prog: Int, b: Boolean) {
                     // Display the current progress of SeekBar
-                  /*  val min= 2
+                   val min= 1
 
-                    seekBarValues[x] = (min + seekBarArrays[x].progress).toFloat()
-                    val ocena = seekBarValues[x] */
-                    val min=2
-                    var temp = min + seekBarArrays[x].progress
-                    seekBarValues.add(temp)
-                    Toast.makeText(applicationContext,"Ocena : $temp",Toast.LENGTH_SHORT).show()
+                   var ocena = min+prog
+                    Toast.makeText(applicationContext, "Ocena : $ocena", Toast.LENGTH_SHORT).show()
+
                 }
 
 
@@ -94,28 +91,39 @@ class SecoundActivity : AppCompatActivity() {
                 override fun onStopTrackingTouch(seekBar: SeekBar) {
                     // Do something
                     //Toast.makeText(applicationContext,"stop tracking",Toast.LENGTH_SHORT).show()
+                    val min = 1
+                    var t = min + seekBarArrays[x].progress
 
-
+                    if (seekBarValues.count() < i) {
+                        seekBarValues.add(t)
+                    } else
+                    {
+                        seekBarValues[x] = t
+                    }
+                       //seekBarArrays[x].isEnabled = false
 
                 }
 
                 })
 
 
-
         }
+
 
 
 
     }
     fun submit2(v:View){
+
         val buttonAvg = findViewById<Button>(R.id.buttonAvg)
+
+
         var x = 0
         var oceny : Float = x.toFloat()
         if( seekBarValues.isNotEmpty()){
-         var temp=seekBarValues.count()
 
-            for(it in 0 until temp){ //if seekBarValues min  = 2
+
+            for(it in 0 until seekBarValues.count()){
 
                 oceny += seekBarValues[it]
             }
